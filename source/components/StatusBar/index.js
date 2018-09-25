@@ -7,7 +7,6 @@ import Styles from './styles.m.css';
 
 export default class StatusBar extends Component {
     render () {
-
         const {
             currentUserFirstName,
             currentUserLastName,
@@ -15,7 +14,7 @@ export default class StatusBar extends Component {
         } = this.props;
 
         return (
-            <section className = {Styles.statusBar} >
+            <section className = { Styles.statusBar } >
                 <button>
                     <img src= { avatar } />
                     <span>{ currentUserFirstName }</span>
