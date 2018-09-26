@@ -1,28 +1,27 @@
 // Core
 import React, { Component } from 'react';
 
+// Components
+import { Consumer } from 'components/HOC/withProfile';
+
 //instruments
 
 import Styles from './styles.m.css'
 
 export default class Composer extends Component {
     render () {
-
-        const {
-            currentUserFirstName,
-            avatar,
-        } = this.props;
-        
         return (
-            <section className = { Styles.composer }>
-                <img src = {avatar} />
-                <form>
-                    <textarea placeholder= {`What do you think, ${
-                        {currentUserFirstName}
-                    }?`}/>
-                    <input type='submit' value='post' />
-                </form>
-            </section>
+            <Consumer>
+               {(context) => (
+                <section className = { Styles.composer }>
+                    <img src = { context.avatar } />
+                    <form>
+                        <textarea placeholder= {`What do you think, ${ context.currentUserFirstName }?`}/>
+                        <input type='submit' value='post' />
+                    </form>
+                </section>
+               )}
+            </Consumer>
         );
     }
 }
