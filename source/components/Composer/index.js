@@ -39,7 +39,6 @@ export default class Composer extends Component {
     }
 
     _submitComment (event) {
-        event.preventDefault();
         const { comment } = this.state;
         
         if (!comment) {
