@@ -20,8 +20,21 @@ export default class Post extends Component {
         _removePost: func.isRequired,
     };
 
+    constructor () {
+        super();
+
+        this._removePost = this._removePost.bind(this);
+    }
+
+    _removePost () {
+        const { _removePost, id } = this.props;
+
+        _removePost(id);
+    }
+
+
     render () {
-        const { comment, created, _likePost, id, likes, _removePost } = this.props;
+        const { comment, created, _likePost, id, likes } = this.props;
 
         return (
             <Consumer>
@@ -41,7 +54,7 @@ export default class Post extends Component {
                             { ...context }  
                         />
                     </section>
-                )}_removePost
+                )}
             </Consumer>
         );
     }

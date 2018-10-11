@@ -20,7 +20,6 @@ export default class Feed extends Component {
         this._createPost = this._createPost.bind(this);
         this._setPostsFetchingState = this._setPostsFetchingState.bind(this);
         this._likePost = this._likePost.bind(this);
-        this._removePost = this._removePost.bind(this);
     }
 
     state = {
