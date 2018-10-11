@@ -104,9 +104,9 @@ export default class Feed extends Component {
 
         await delay(1200);
 
-        this.setState({
-            posts: this.state.posts.filter(post => post.id !==id)
-        })
+        this.setState(({ post }) => ({
+            posts: posts.filter((post) => post.id !== id) 
+        }));
     }
 
 
