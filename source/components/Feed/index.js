@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import moment from 'moment';
 
 //Components
+import { withProfile } from 'components/HOC/withProfile';
 import Composer from 'components/Composer';
 import Post from 'components/Post';
 import StatusBar from 'components/StatusBar';
@@ -12,7 +13,7 @@ import Spinner from 'components/Spinner';
 import Styles from './styles.m.css';
 import { getUniqueID, delay } from 'instruments';
 
-
+@withProfile
 export default class Feed extends Component {
 
     state = {
@@ -106,7 +107,6 @@ export default class Feed extends Component {
             return ( 
                 <Post 
                     key = { post.id } 
-                    { ...post } 
                     _likePost = { this._likePost } 
                     _removePost = { this._removePost }    
                 />
