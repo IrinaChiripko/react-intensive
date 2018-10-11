@@ -97,14 +97,13 @@ export default class Feed extends Component {
     }
 
     async _removePost (id) {
-        this._setPostsFetchingState({
-            isPostFetching: true,
-        });
+        this._setPostsFetchingState(true);
 
         await delay(1200);
 
         this.setState(({ post }) => ({
-            posts: posts.filter((post) => post.id !== id) 
+            posts: posts.filter((post) => post.id !== id),
+            isPostFetching: false,
         }));
     }
 
@@ -113,11 +112,13 @@ export default class Feed extends Component {
         const { posts, isPostFetching } = this.state;
 
         const postsJSX = posts.map((post) => {
-            return <Post 
+            return (
+                <Post 
                 key = { post.id } { ...post } 
                 _likePost = { this._likePost } 
                 _removePost = { this._removePost }    
-            />;
+            />
+            );
         });
 
         return (
