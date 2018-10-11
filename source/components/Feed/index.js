@@ -87,7 +87,7 @@ export default class Feed extends Component {
         });
     }
 
-    _removePost = (id) => {
+    _removePost = async (id) => {
         this._setPostsFetchingState(true);
 
         await delay(1200);
