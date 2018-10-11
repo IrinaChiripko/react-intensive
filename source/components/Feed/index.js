@@ -97,7 +97,9 @@ export default class Feed extends Component {
     }
 
     async _removePost (id) {
-        this._setPostsFetchingState(true);
+        this._setPostsFetchingState({
+            isPostFetching: true,
+        });
 
         await delay(1200);
 
