@@ -44,7 +44,7 @@ export default class Post extends Component {
             likes, 
             firstName, 
             lastName,
-            avatar
+            avatar,
         } = this.props;
 
         const cross = this._getCross();
