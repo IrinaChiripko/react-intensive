@@ -1,5 +1,7 @@
 // Core
 import React, { Component } from 'react';
+import { Transition } from 'react-transition-group';
+import { fromTo } from 'gsap'; 
 
 //Components
 import { withProfile } from 'components/HOC/withProfile';
@@ -8,6 +10,7 @@ import Composer from 'components/Composer';
 import Post from 'components/Post';
 import StatusBar from 'components/StatusBar';
 import Spinner from 'components/Spinner';
+import Postman from 'components/Postman';
 
 //Instruments
 import Styles from './styles.m.css';
@@ -18,7 +21,7 @@ import { socket } from 'socket/init';
 export default class Feed extends Component {
 
     state = {
-        posts: [],
+        posts:          [],
         isPostFetching: false
     };
 
@@ -69,28 +72,12 @@ export default class Feed extends Component {
                 }));
             }
         });
-
-        socket.on('dislike', (postJSON) => {
-            const { data: dislikedPost, meta  } = JSON.parse(postJSON);
-
-            if (
-                `${currentUserFirstName} ${currentUserLastName}` ===
-                `${meta.authorFirstName} ${meta.authorLastName}`
-            ) {
-                this.setState(({ posts }) => ({
-                    posts: posts.map(
-                        (post) => post.id !== likedPost.id ? likedPost : post,
-                    ),
-                }));
-            }
-        });
     }
 
     componentWillUnmount () {
         socket.removeListener('create');
         socket.removeListener('remove');
         socket.removeListener('like');
-        socket.removeListener('dislike');
     }
 
     _setPostsFetchingState = (state) => {
@@ -171,6 +158,16 @@ export default class Feed extends Component {
         }));
     }
 
+
+    _animateComposerEnter = (composer) => {
+        fromTo(
+            composer, 
+            1, 
+            { opacity: 0, rotationX: 50 }, 
+            { opacity: 1, rotationX: 0 },
+        );
+    }
+
     render () {
         const { posts, isPostFetching } = this.state;
 
@@ -190,7 +187,14 @@ export default class Feed extends Component {
             <section className = { Styles.feed }>
                 <Spinner isSpinning = { isPostFetching } />
                 <StatusBar />
-                <Composer _createPost = { this._createPost } />
+                <Transition 
+                    appear
+                    in
+                    timeout = { 4000 }
+                    onEnter = { this._animateComposerEnter }>
+                    <Composer _createPost = { this._createPost } />
+                </Transition>
+               <Postman />
                 { postsJSX }
             </section>
         );
