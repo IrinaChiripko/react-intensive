@@ -10,18 +10,26 @@ import { withProfile } from 'components/HOC/withProfile';
 import Styles from './styles.m.css';
 
 @withProfile
-export default class Postman extends Component { 
+export default class Postman extends Component {
+
 
     _animatePostEnter = (postman) => {
         fromTo(
             postman, 
             1, 
-            { opacity: 0, rotationY: 360 }, 
+            { 
+                opacity: 0, 
+                x: 0,
+                width: 0
+            }, 
             { 
                 opacity: 1, 
-                rotationY: 0,
+                x: 100,
+                width: "auto",
                 onComplete: () => 
-                    console.log('postman animation start completed ')
+                    {
+                        opacity: 0
+                    },
             },
         );
     };
