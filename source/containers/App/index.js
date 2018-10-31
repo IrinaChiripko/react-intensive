@@ -16,7 +16,7 @@ const options = {
     currentUserLastName: 'Безкоровайная'
 };
 
-@hot(module)
+@hot(module)  
 export default class App extends Component {
     render () {
         return (

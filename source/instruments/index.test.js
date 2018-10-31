@@ -1,5 +1,5 @@
 // Core
-import { sum, delay, getUniqueID } from './';
+import { sum, delay, getUniqueID, getFullApiUrl } from './';
 
 describe('instruments:', () => {
     test('sum function should be a function', () => {
@@ -36,4 +36,13 @@ describe('instruments:', () => {
         expect(getUniqueID(5)).toHaveLength(5);
         expect(getUniqueID(13)).toHaveLength(13);
     });
+
+    test('getFullApiUrl function should throw', () => {
+        expect(() => getFullApiUrl('url')).toThrow();
+    });
+
+    test('getFullApiUrl function should be a string', () => {
+        expect(typeof getFullApiUrl('api', 'GROUP_ID')).toBe('string');
+    });
+
 });
