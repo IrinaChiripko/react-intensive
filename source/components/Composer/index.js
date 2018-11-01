@@ -1,6 +1,6 @@
 // Core
 import React, { Component } from 'react';
-import propTypes from 'prop-types';
+import { func, string } from 'prop-types';
 
 // Components
 import { withProfile } from 'components/HOC/withProfile';
@@ -9,10 +9,11 @@ import { withProfile } from 'components/HOC/withProfile';
 
 import Styles from './styles.m.css'
 
-@withProfile
-export default class Composer extends Component {
+export class Composer extends Component {
     static propTypes = {
-        _createPost: propTypes.func.isRequired,
+        _createPost:            func.isRequired,
+        avatar:                 string.isRequired,
+        currentUserFirstName:   string.isRequired,
     };
 
     state = {
@@ -73,3 +74,5 @@ export default class Composer extends Component {
         );
     }
 }
+
+export default withProfile(Composer);
